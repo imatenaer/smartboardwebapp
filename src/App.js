@@ -2,6 +2,7 @@ import "./App.css";
 import Clock from "react-live-clock";
 import "moment-timezone";
 import React, { Component, useEffect, useState } from 'react';
+import Schedule from './Schedule'
 import Weather from 'simple-react-weather';
 
 function Lunch() {
@@ -9,35 +10,49 @@ function Lunch() {
   return "[INSERT LUNCH]";
 }
 
+
 function App() {
-    // lat: 44.926076099822076,
-    // long: -93.17279580193134,
-    //State
-    const [apiData, setApiData] = useState(0);
-    const city = "saint paul";
-    //API KEY AND URL
-    const apiKey = "e0828c042afc5bdaaefa6091ab8aba02";
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+  // lat: 44.926076099822076,
+  // long: -93.17279580193134,
+  //State
+  const [apiData, setApiData] = useState(0);
+  const city = "saint paul";
+  //API KEY AND URL
+  const apiKey = "e0828c042afc5bdaaefa6091ab8aba02";
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
 
-    useEffect(()=>{
-      console.log(apiUrl)
-      fetch(apiUrl)
-        .then((res) => res.json())
-        .then(setApiData)
-    }, [apiUrl]);
+  useEffect(()=>{
+    console.log(apiUrl)
+    fetch(apiUrl)
+      .then((res) => res.json())
+      .then(setApiData)
+  }, [apiUrl]);
 
-    //kelvin to farhenheit
-    var kTF = (k) => ((k * 1.8)-459.67).toFixed(2);
-
-  return (
-    <div className="appBackground">
-      <h3>Lunch:</h3>
-      <Lunch />
-      <br></br>
-      <Clock ticking={true} format="hh:mm:ss" />
-      <p>{apiData.main ? kTF(apiData.main.temp):"no data"}</p>
-    </div>
-  );
+  //kelvin to farhenheit
+  var kTF = (k) => ((k * 1.8)-459.67).toFixed(2);
+    return(
+      <div className="appBackground">
+        <div className="clock">
+        <Clock style={{fontSize: '1.5em'}} ticking={true} format="hh:mm:ss" />
+        </div>
+        <div className="container">
+          <div>
+            <p>It is {apiData.main ? apiData.weather.main : "no data"} outside</p>
+            <p>{apiData.main ? kTF(apiData.main.temp):"no data"}°F</p>
+            <h3>Today's lunch is:</h3>
+            <Lunch />
+          </div>
+          <div>
+            <div className="dailySchedule">
+            <h4>Today's schedule:</h4>
+              <div className="scheduleComponent">
+                <Schedule />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
 }
 
 export default App;
