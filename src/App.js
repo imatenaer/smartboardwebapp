@@ -10,6 +10,11 @@ function Lunch() {
   return "[INSERT LUNCH]";
 }
 
+function Announcements(){
+  //like lunch this will need to be updated daily by STC or an admin
+  return "[INSERT ANNOUNCEMENTS]"
+}
+
 
 function App() {
   // lat: 44.926076099822076,
@@ -33,12 +38,13 @@ function App() {
     return(
       <div className="appBackground">
         <div className="clock">
-        <Clock style={{fontSize: '1.5em'}} ticking={true} format="hh:mm:ss" />
+        <Clock style={{fontSize: '1.5em'}} ticking={true} format="hh:mm A" />
         </div>
         <div className="container">
           <div>
-            <p>It is {apiData.main ? apiData.weather.main : "no data"} outside</p>
-            <p>{apiData.main ? kTF(apiData.main.temp):"no data"}°F</p>
+            <h3>Announcements:</h3>
+            <Announcements />
+            <p>It is currently {apiData.main ? kTF(apiData.main.temp):"no data"}°F</p>
             <h3>Today's lunch is:</h3>
             <Lunch />
           </div>

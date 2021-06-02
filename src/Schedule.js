@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
 import Tabletop from 'tabletop'
 
+
+//schedule is currently a demo and will need to be changed by STC, also the spreadsheet should be changed incase of a special schedule
+//https://docs.google.com/spreadsheets/d/10vPuNBvhVqgznb-boGDCB__LI_0YPuemINi-GFVBb5s/edit?usp=sharing
 class Schedule extends Component {
     constructor() {
         super();
